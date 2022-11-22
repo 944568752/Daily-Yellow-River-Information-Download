@@ -14,9 +14,9 @@
 # Parameters start =======
 
 # Start date (include)
-Start_date = '2021-06-01'
+Start_date = '2003-05-20'
 # End date (include)
-End_date = '2021-07-06'
+End_date = '2003-06-24'
 # Result save path
 # (Under the Download_data folder)
 Save_path = r'./'
@@ -132,7 +132,9 @@ def Information_extraction(response):
                 response_contents_lists=[]
 
                 for single_response_content in single_response.contents:
-                    response_contents_lists.append(single_response_content.contents[0])
+                    single_response_content_cache=single_response_content.contents
+                    if len(single_response_content_cache)!=0:
+                        response_contents_lists.append(single_response_content_cache[0])
 
                 response_lists.append(response_contents_lists)
 
