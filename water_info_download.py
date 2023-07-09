@@ -102,7 +102,7 @@ def Generate_date_list(start_date,end_date):
     end_date=datetime.datetime.strptime(end_date,'%Y-%m-%d')
     # Make sure the start time is less than the end time
     if start_date > end_date:
-        print('Start time is greater than end time !')
+        print('Start time is greater than end time! ')
         sys.exit(0)
     else:
         while(start_date <= end_date):
@@ -190,7 +190,7 @@ if __name__=='__main__':
 
         Result_save(Save_path,Result_excel,date_list)
 
-        print(f'Date : {date_list} ,data download is complete !')
+        print(f'Date : {date_list} ,data download is complete! ')
 
 
 
