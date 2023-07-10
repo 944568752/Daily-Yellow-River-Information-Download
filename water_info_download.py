@@ -2,6 +2,7 @@
 
 # 水情日报 数据下载
 # Water information data download
+# Version: 2.0
 
 
 # Water information url
@@ -9,14 +10,18 @@
 
 
 # Design by HanLin
-
+# Something wrong in 2007.04.05, 2020.11.31, 2020.12.01!!!
+# # Start date (include)
+# Start_date = '2003-05-20'
+# # End date (include)
+# End_date = '2003-06-24'
 
 # Parameters start =======
 
 # Start date (include)
-Start_date = '2003-05-20'
+Start_date = '2007-04-04'
 # End date (include)
-End_date = '2003-06-24'
+End_date = '2007-04-06'
 # Result save path
 # (Under the Download_data folder)
 Save_path = r'./'
@@ -178,20 +183,39 @@ if __name__=='__main__':
         Generate_date_related_postdata(postdata,date_list)
 
         Next_response = session.post(Water_info_url, headers=header_next, data=postdata)
-
-        Next_response.raise_for_status()
-        Next_response.encoding = Next_response.apparent_encoding
-        # Get the returned infomation
-        Next_response = Next_response.text
-
-        Information_lists = Information_extraction(Next_response)
-
-        Result_excel = Generate_excel(Information_lists)
-
-        Result_save(Save_path,Result_excel,date_list)
-
-        print(f'Date : {date_list} ,data download is complete! ')
-
+        
+        # 200: Success
+        # 500: Failure
+        Next_response_status_code=Next_response.status_code
+        if Next_response_status_code==200:
+            
+            Next_response.raise_for_status()
+            Next_response.encoding = Next_response.apparent_encoding
+            # Get the returned infomation
+            Next_response = Next_response.text
+            
+            # Detect empty pages
+            # For example: '0|error|500||'
+            if 'error' in Next_response and len(Next_response)<38:
+                
+                print(f'Date : {date_list} , an empty page detected, skip! ')
+                continue
+                
+            else:
+                # Normal
+                Information_lists = Information_extraction(Next_response)
+        
+                Result_excel = Generate_excel(Information_lists)
+        
+                Result_save(Save_path,Result_excel,date_list)
+        
+                print(f'Date : {date_list} , data download is complete! ')
+        
+        else: 
+            # Internal Server Error
+            print(f'Date : {date_list} , an internal server error occurred, skip! ')
+            continue
+        
 
 
 
