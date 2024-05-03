@@ -2,13 +2,14 @@
 
 # 水情日报 数据下载
 # Water information data download
-# Version: 3.0
-# Maintain on 2023.07.20
+# Version: 4.0
+# Maintain on 2024.05.04
 
 
 
 # Water information url
-# http://61.163.88.227:8006/hwsq.aspx?sr=0nkRxv6s9CTRMlwRgmfFF6jTpJPtAv87
+# (old) http://61.163.88.227:8006/hwsq.aspx?sr=0nkRxv6s9CTRMlwRgmfFF6jTpJPtAv87
+# (new) http://61.163.88.227:8006/hwsq2.aspx?sr=0nkRxv6s9CTRMlwRgmfFF6jTpJPtAv87
 
 
 # Design by HanLin
